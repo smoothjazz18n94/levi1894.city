@@ -1,140 +1,1226 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Levi — Front-End Developer</title>
-  <style>
-    :root {
-      --bg: #fafafa;
-      --text: #111;
-      --muted: #666;
-      --accent: #444; /* Neutral dark accent */
-      --border: #e5e5e5;
-      --max: 960px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi | Front End Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --terminal: #00ff00;
+            --transition: all 0.3s ease;
+        }
 
-    * { box-sizing: border-box; margin:0; padding:0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: Georgia, 'Times New Roman', serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.8;
-    }
+        /* Code Background Animation */
+        #code-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
 
-    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
-    a:hover { border-bottom-color: var(--accent); }
+        .code-line {
+            position: absolute;
+            color: var(--terminal);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: floatCode 20s linear infinite;
+        }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top:0;
-      background: var(--bg);
-      z-index: 100;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
+        @keyframes floatCode {
+            0% {
+                transform: translateY(100vh) translateX(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
 
-    .nav { max-width: var(--max); margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-    .brand { font-weight: bold; letter-spacing: 0.5px; color: var(--accent); }
-    .nav-links { display: flex; gap: 1.5rem; font-size: 0.95rem; }
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background-color: rgba(26, 37, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+        }
 
-    section { padding: 8rem 1rem; max-width: var(--max); margin:0 auto; }
-    h1,h2 { margin-bottom: 1.5rem; }
-    h1 { font-size: 2.5rem; color: var(--accent); font-weight:600; }
-    h2 { font-size: 1.8rem; color: var(--accent); font-weight:500; }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
 
-    #hero {
-      text-align: center;
-      padding: 8rem 1rem;
-      background: linear-gradient(135deg, #f7f7f7, #eaeaea);
-    }
+        .logo span {
+            color: var(--terminal);
+        }
 
-    .hero p, .content { font-size: 1.1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-    .portrait { width: 150px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 1rem; display: block; }
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+        }
 
-    .skills { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
-    .skill { padding: 0.5rem 1rem; border: 1px solid var(--accent); border-radius: 20px; font-weight: bold; transition: background 0.3s, color 0.3s; }
-    .skill:hover { background: var(--accent); color: #fff; cursor: default; }
+        nav a:hover {
+            color: var(--terminal);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
 
-    .projects { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; margin-top: 2rem; }
-    .project-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      background:#fff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-    .project-card h3 { margin-bottom:0.5rem; }
-    .project-card p { color: var(--muted); font-size:0.95rem; }
+        nav a::after {
+            content: '>';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: var(--transition);
+            color: var(--terminal);
+        }
 
-    footer { border-top:1px solid var(--border); padding:2rem 1rem; color: var(--muted); text-align:center; }
+        nav a:hover::after {
+            opacity: 1;
+            left: -10px;
+        }
 
-    @media (max-width: 600px){
-      h1{ font-size:2rem; }
-      .skills { justify-content: center; }
-    }
-  </style>
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 5rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--terminal);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #bdc3c7;
+            max-width: 600px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .headshot-container {
+            flex: 0 0 300px;
+            position: relative;
+        }
+
+        .headshot {
+            width: 180px; 
+              border-radius: 50%;
+               border: 2px solid var(--accent); margin-bottom: 1rem; 
+               display: block; 
+              }
+
+  /* Skills */
+        
+
+        .headshot:hover {
+            transform: scale(1.05);
+            border-color: var(--terminal);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .person-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--terminal);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+            background-color: rgba(52, 152, 219, 0.05);
+            margin: 2rem 0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Playlist Section */
+        .playlist-container {
+            background-color: rgba(26, 37, 47, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .playlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .playlist-title {
+            font-size: 1.8rem;
+            color: var(--terminal);
+        }
+
+        .playlist-update {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .playlist-description {
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #bdc3c7;
+        }
+
+        .playlist-tracks {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(44, 62, 80, 0.5);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .track:hover {
+            background-color: rgba(44, 62, 80, 0.8);
+            transform: translateY(-5px);
+        }
+
+        .track-number {
+            font-size: 1.2rem;
+            color: var(--terminal);
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .track-info {
+            flex: 1;
+        }
+
+        .track-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .track-artist {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .track-duration {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .music-player {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .player-btn {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .player-btn:hover {
+            color: var(--terminal);
+        }
+
+        .player-progress {
+            flex: 1;
+            height: 4px;
+            background-color: rgba(52, 152, 219, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 30%;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background-color: rgba(26, 37, 47, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--terminal);
+        }
+
+        .project-img {
+            height: 200px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--terminal);
+            font-size: 3rem;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .project-desc {
+            color: #bdc3c7;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.7rem;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--terminal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 0.3rem;
+            color: var(--light);
+        }
+
+        .contact-details p {
+            color: #bdc3c7;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            background-color: rgba(26, 37, 47, 0.7);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 4px;
+            color: var(--light);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--terminal);
+        }
+
+        .submit-btn {
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--terminal);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(26, 37, 47, 0.9);
+            border-top: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--terminal);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .headshot-container {
+                flex: 0 0 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Terminal Theme */
+        .terminal-line {
+            font-family: 'Courier New', monospace;
+            color: var(--terminal);
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-prompt {
+            color: var(--secondary);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background-color: var(--terminal);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
+    <!-- Animated Code Background -->
+    <div id="code-bg"></div>
 
-<header>
-  <nav class="nav">
-    <div class="brand">levi1894.city</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-</header>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">Levi<span>></span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#playlist">Playlist</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<section id="hero">
-  <h1>Hi, I'm Levi — Front-End Developer</h1>
-  <p class="content">Building clean, responsive, and modern web experiences with HTML, CSS, JavaScript, and learning Java. I focus on clarity, usability, and timeless design.</p>
-</section>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm <span>Levi</span></h1>
+                <div class="tagline">Front End Developer</div>
+                <p>Creating beautiful, functional web experiences with clean code and modern technologies. Passionate about user experience and performance optimization.</p>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">levi@portfolio:~$</span> npm start creativity<span class="terminal-cursor"></span>
+                </div>
+                <a href="#projects" class="cta-button">View My Work</a>
+            </div>
+            <div class="headshot-container">
+                <img src="unnamed.jpg" alt="Levi" class="headshot">
+            </div>
+        </section>
 
-<section id="about">
-  <h2>About Me</h2>
-  <img src="/unnamed.jpg" alt="Levi" class="portrait">
-  <p class="content">I am a passionate front-end developer who enjoys turning ideas into polished web experiences. My goal is to combine creativity and code to build sites that are both functional and visually appealing.</p>
-</section>
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a passionate front-end developer with a keen eye for design and a love for creating intuitive user experiences. My journey in web development started several years ago, and I've been honing my skills ever since.</p>
+                    <p>I believe in writing clean, maintainable code and staying up-to-date with the latest web technologies. When I'm not coding, you can find me exploring new music, reading tech blogs, or working on personal projects.</p>
+                    <div class="person-quote">
+                        "There's a real person behind this code."
+                    </div>
+                    <p>My approach to development combines technical expertise with creative problem-solving. I enjoy turning complex challenges into simple, elegant solutions.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Tech Stack</h3>
+                    <div class="skills">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">GSAP</span>
+                        <span class="skill-tag">SASS</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag">Web Performance</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">API Integration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-desc">Interactive dashboard with real-time data visualization and customizable widgets.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-desc">Modern online store with product filtering, cart functionality, and secure checkout.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Stripe API</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Music Discovery App</h3>
+                        <p class="project-desc">Web application for discovering new music based on your listening preferences.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Spotify API</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Playlist Section -->
+        <section id="playlist">
+            <h2 class="section-title">This Week's Soundtrack</h2>
+            <div class="playlist-container">
+                <div class="playlist-header">
+                    <h3 class="playlist-title">Levi's Coding Playlist</h3>
+                    <div class="playlist-update">Updated: <span id="currentDate"></span></div>
+                </div>
+                <p class="playlist-description">Music that fuels my coding sessions this week. A mix of focus tracks and creative inspiration.</p>
+                
+                <div class="playlist-tracks" id="playlistTracks">
+                    <!-- Tracks will be populated by JavaScript -->
+                </div>
+                
+                <div class="music-player">
+                    <div class="player-controls">
+                        <button class="player-btn" id="prevBtn">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="player-btn" id="playBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="player-btn" id="nextBtn">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+                    <div class="player-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div id="nowPlaying">Select a track to play</div>
+                </div>
+            </div>
+        </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="projects">
-    <div class="project-card">
-      <h3>Project 1</h3>
-      <p>A responsive news layout built with CSS Grid. <a href="#" target="_blank">View Code</a> | <a href="#" target="_blank">Live Demo</a></p>
-    </div>
-    <div class="project-card">
-      <h3>Project 2</h3>
-      <p>A minimal blog structure for readability. <a href="#" target="_blank">View Code</a> | <a href="#" target="_blank">Live Demo</a></p>
-    </div>
-    <div class="project-card">
-      <h3>Project 3</h3>
-      <p>A FreeCodeCamp layout experiment. <a href="#" target="_blank">View Code</a> | <a href="#" target="_blank">Live Demo</a></p>
-    </div>
-  </div>
-</section>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>levi@africamail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Website</h3>
+                            <p>levi1894.city</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Remote / Available Worldwide</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Response Time</h3>
+                            <p>Usually within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p class="content">Reach me at <a href="mailto:levi@africamail.com">levi@africamail.com</a></p>
-</section>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-codepen"></i></a>
+        </div>
+        <p class="copyright">© <span id="currentYear"></span> Levi. All rights reserved.</p>
+    </footer>
 
-<footer>
-  <p>© 2026 Levi</p>
-</footer>
-
+    <script>
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date and year
+            const currentDate = new Date();
+            document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('currentYear').textContent = currentDate.getFullYear();
+            
+            // Create animated code background
+            createCodeBackground();
+            
+            // Initialize playlist
+            initializePlaylist();
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    // Scroll to section
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // In a real application, you would send this data to a server
+                // For now, we'll just show an alert
+                alert(`Thank you for your message, ${name}! I'll get back to you at ${email} as soon as possible.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+            
+            // Dynamic color palette based on time of day
+            updateColorPalette();
+            
+            // Add scroll animations
+            setupScrollAnimations();
+        });
+        
+        // Create animated code background
+        function createCodeBackground() {
+            const codeBg = document.getElementById('code-bg');
+            const codeLines = [
+                "function createPortfolio() {",
+                "  const skills = ['HTML', 'CSS', 'JS'];",
+                "  return <Portfolio skills={skills} />;",
+                "}",
+                "const developer = new Developer('Levi');",
+                "developer.specialize('Frontend');",
+                "if (problem) {",
+                "  solve(problem);",
+                "}",
+                "npm install creativity --save-dev",
+                "git commit -m 'Add awesome portfolio'",
+                "while (coding) {",
+                "  drinkCoffee();",
+                "}",
+                "const portfolio = {",
+                "  modern: true,",
+                "  minimal: true,",
+                "  interactive: true",
+                "};"
+            ];
+            
+            // Create code lines at random positions
+            for (let i = 0; i < 15; i++) {
+                const codeLine = document.createElement('div');
+                codeLine.className = 'code-line';
+                codeLine.textContent = codeLines[Math.floor(Math.random() * codeLines.length)];
+                codeLine.style.left = `${Math.random() * 100}%`;
+                codeLine.style.animationDelay = `${Math.random() * 20}s`;
+                codeLine.style.fontSize = `${12 + Math.random() * 6}px`;
+                codeBg.appendChild(codeLine);
+            }
+            
+            // Make code lines interactive on hover
+            document.querySelectorAll('.code-line').forEach(line => {
+                line.addEventListener('mouseenter', function() {
+                    this.style.opacity = '1';
+                    this.style.color = '#ff5555';
+                    this.style.textShadow = '0 0 10px #ff5555';
+                });
+                
+                line.addEventListener('mouseleave', function() {
+                    this.style.opacity = '0.7';
+                    this.style.color = '';
+                    this.style.textShadow = '';
+                });
+            });
+        }
+        
+        // Initialize playlist with tracks
+        function initializePlaylist() {
+            const playlistTracks = document.getElementById('playlistTracks');
+            const tracks = [
+                { title: "Midnight City", artist: "M83", duration: "4:04" },
+                { title: "Blinding Lights", artist: "The Weeknd", duration: "3:22" },
+                { title: "Solar Echoes", artist: "Waveshaper", duration: "4:18" },
+                { title: "Digital Love", artist: "Daft Punk", duration: "5:01" },
+                { title: "Code Cascade", artist: "Home", duration: "3:45" },
+                { title: "Neon Dreams", artist: "The Midnight", duration: "4:32" },
+                { title: "Synthetic Dawn", artist: "FM-84", duration: "5:12" },
+                { title: "Pixel Rain", artist: "Timecop1983", duration: "4:28" }
+            ];
+            
+            // Clear existing content
+            playlistTracks.innerHTML = '';
+            
+            // Add tracks to playlist
+            tracks.forEach((track, index) => {
+                const trackElement = document.createElement('div');
+                trackElement.className = 'track';
+                trackElement.dataset.index = index;
+                
+                trackElement.innerHTML = `
+                    <div class="track-number">${index + 1}</div>
+                    <div class="track-info">
+                        <div class="track-title">${track.title}</div>
+                        <div class="track-artist">${track.artist}</div>
+                    </div>
+                    <div class="track-duration">${track.duration}</div>
+                `;
+                
+                // Add click event to play track
+                trackElement.addEventListener('click', function() {
+                    playTrack(index);
+                });
+                
+                playlistTracks.appendChild(trackElement);
+            });
+            
+            // Initialize player controls
+            const playBtn = document.getElementById('playBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            const nowPlaying = document.getElementById('nowPlaying');
+            
+            let currentTrack = 0;
+            let isPlaying = false;
+            let progressInterval;
+            
+            function playTrack(index) {
+                currentTrack = index;
+                const track = tracks[index];
+                nowPlaying.textContent = `Now Playing: ${track.title} - ${track.artist}`;
+                
+                // Update play button
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                isPlaying = true;
+                
+                // Reset and start progress bar
+                clearInterval(progressInterval);
+                let progress = 0;
+                progressBar.style.width = '0%';
+                
+                progressInterval = setInterval(() => {
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        playNextTrack();
+                        return;
+                    }
+                    
+                    progress += 0.5;
+                    progressBar.style.width = `${progress}%`;
+                }, 100);
+                
+                // Highlight current track
+                document.querySelectorAll('.track').forEach((trackEl, i) => {
+                    if (i === index) {
+                        trackEl.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
+                        trackEl.style.borderLeft = '3px solid var(--terminal)';
+                    } else {
+                        trackEl.style.backgroundColor = '';
+                        trackEl.style.borderLeft = 'none';
+                    }
+                });
+            }
+            
+            function playNextTrack() {
+                currentTrack = (currentTrack + 1) % tracks.length;
+                playTrack(currentTrack);
+            }
+            
+            function playPrevTrack() {
+                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+                playTrack(currentTrack);
+            }
+            
+            function togglePlayPause() {
+                if (isPlaying) {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    clearInterval(progressInterval);
+                } else {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    // Resume progress
+                    let currentWidth = parseFloat(progressBar.style.width) || 0;
+                    let progress = currentWidth;
+                    
+                    progressInterval = setInterval(() => {
+                        if (progress >= 100) {
+                            clearInterval(progressInterval);
+                            playNextTrack();
+                            return;
+                        }
+                        
+                        progress += 0.5;
+                        progressBar.style.width = `${progress}%`;
+                    }, 100);
+                }
+                
+                isPlaying = !isPlaying;
+            }
+            
+            // Add event listeners to player controls
+            playBtn.addEventListener('click', togglePlayPause);
+            prevBtn.addEventListener('click', playPrevTrack);
+            nextBtn.addEventListener('click', playNextTrack);
+            
+            // Auto-play first track
+            playTrack(0);
+        }
+        
+        // Update color palette based on time of day
+        function updateColorPalette() {
+            const hour = new Date().getHours();
+            const root = document.documentElement;
+            
+            if (hour >= 6 && hour < 12) {
+                // Morning
+                root.style.setProperty('--secondary', '#3498db');
+                root.style.setProperty('--terminal', '#00ff00');
+            } else if (hour >= 12 && hour < 18) {
+                // Afternoon
+                root.style.setProperty('--secondary', '#9b59b6');
+                root.style.setProperty('--terminal', '#ff9900');
+            } else if (hour >= 18 && hour < 22) {
+                // Evening
+                root.style.setProperty('--secondary', '#e74c3c');
+                root.style.setProperty('--terminal', '#ff5555');
+            } else {
+                // Night
+                root.style.setProperty('--secondary', '#2c3e50');
+                root.style.setProperty('--terminal', '#00ccff');
+            }
+        }
+        
+        // Setup scroll animations
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe sections for animation
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+            
+            // Observe project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }
+    </script>
 </body>
-</html>
