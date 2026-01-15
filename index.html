@@ -74,7 +74,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             background-color: rgba(26, 37, 47, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -85,7 +85,7 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--secondary);
             text-decoration: none;
@@ -99,7 +99,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         nav a {
@@ -142,20 +142,20 @@
 
         /* Main Content */
         main {
-            margin-top: 80px;
+            margin-top: 70px;
         }
 
         section {
-            padding: 5rem 5%;
-            min-height: 100vh;
+            padding: 3rem 5%;
+            min-height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             color: var(--secondary);
             position: relative;
             display: inline-block;
@@ -164,55 +164,30 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 0;
-            width: 60px;
+            width: 50px;
             height: 3px;
             background-color: var(--accent);
         }
 
-        /* Hero Section */
+        /* Hero Section - Photo on LEFT */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 4rem;
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero h1 span {
-            color: var(--terminal);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #bdc3c7;
-            max-width: 600px;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 2rem;
+            gap: 3rem;
+            flex-direction: row;
         }
 
         .headshot-container {
-            flex: 0 0 300px;
+            flex: 0 0 250px;
             position: relative;
         }
 
         .headshot {
-            width: 25%;
+            width: 100%;
+            max-width: 250px;
             border-radius: 50%;
             border: 5px solid var(--secondary);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -222,6 +197,33 @@
         .headshot:hover {
             transform: scale(1.05);
             border-color: var(--terminal);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--terminal);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #bdc3c7;
+            max-width: 600px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
         }
 
         .cta-button {
@@ -245,30 +247,30 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
         }
 
         .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
         }
 
         .person-quote {
             font-style: italic;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--terminal);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-left: 4px solid var(--accent);
             background-color: rgba(52, 152, 219, 0.05);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
         .skill-tag {
@@ -289,8 +291,8 @@
         .playlist-container {
             background-color: rgba(26, 37, 47, 0.7);
             border-radius: 10px;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
             border: 1px solid rgba(52, 152, 219, 0.2);
         }
 
@@ -298,11 +300,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .playlist-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--terminal);
         }
 
@@ -312,35 +316,36 @@
         }
 
         .playlist-description {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-style: italic;
             color: #bdc3c7;
         }
 
         .playlist-tracks {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
         }
 
         .track {
             display: flex;
             align-items: center;
-            padding: 1rem;
+            padding: 0.8rem;
             background-color: rgba(44, 62, 80, 0.5);
             border-radius: 8px;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .track:hover {
             background-color: rgba(44, 62, 80, 0.8);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .track-number {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--terminal);
-            margin-right: 1rem;
+            margin-right: 0.8rem;
             font-weight: bold;
         }
 
@@ -350,36 +355,37 @@
 
         .track-title {
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .track-artist {
             color: #bdc3c7;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .track-duration {
             color: #7f8c8d;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .music-player {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .player-controls {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .player-btn {
             background: none;
             border: none;
             color: var(--light);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -390,6 +396,7 @@
 
         .player-progress {
             flex: 1;
+            min-width: 150px;
             height: 4px;
             background-color: rgba(52, 152, 219, 0.2);
             border-radius: 2px;
@@ -406,9 +413,9 @@
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .project-card {
@@ -420,49 +427,49 @@
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             border-color: var(--terminal);
         }
 
         .project-img {
-            height: 200px;
+            height: 180px;
             background-color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--terminal);
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
         .project-info {
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
 
         .project-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
             color: var(--secondary);
         }
 
         .project-desc {
             color: #bdc3c7;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .tech-tag {
             padding: 0.3rem 0.7rem;
             background-color: rgba(231, 76, 60, 0.1);
             border-radius: 15px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent);
         }
 
@@ -471,7 +478,7 @@
             color: var(--terminal);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .project-link:hover {
@@ -482,46 +489,49 @@
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .contact-icon {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--secondary);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background-color: rgba(52, 152, 219, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .contact-details h3 {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
             color: var(--light);
+            font-size: 1rem;
         }
 
         .contact-details p {
             color: #bdc3c7;
+            font-size: 0.9rem;
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .form-group {
@@ -533,16 +543,18 @@
         .form-group label {
             color: var(--light);
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .form-group input,
         .form-group textarea {
-            padding: 0.8rem;
+            padding: 0.7rem;
             background-color: rgba(26, 37, 47, 0.7);
             border: 1px solid rgba(52, 152, 219, 0.3);
             border-radius: 4px;
             color: var(--light);
             font-family: inherit;
+            font-size: 0.9rem;
         }
 
         .form-group input:focus,
@@ -552,7 +564,7 @@
         }
 
         .submit-btn {
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 1.8rem;
             background-color: var(--secondary);
             color: white;
             border: none;
@@ -561,6 +573,7 @@
             cursor: pointer;
             transition: var(--transition);
             align-self: flex-start;
+            font-size: 0.9rem;
         }
 
         .submit-btn:hover {
@@ -570,7 +583,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background-color: rgba(26, 37, 47, 0.9);
             border-top: 1px solid rgba(52, 152, 219, 0.2);
         }
@@ -578,24 +591,24 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            gap: 1.2rem;
+            margin-bottom: 0.8rem;
         }
 
         .social-link {
             color: var(--light);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: var(--transition);
         }
 
         .social-link:hover {
             color: var(--terminal);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .copyright {
             color: #7f8c8d;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Responsive Design */
@@ -603,19 +616,45 @@
             .hero {
                 flex-direction: column;
                 text-align: center;
+                gap: 2rem;
+            }
+            
+            .headshot-container {
+                flex: 0 0 200px;
+            }
+            
+            .headshot {
+                max-width: 200px;
             }
             
             .about-content,
             .contact-container {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
-            .headshot-container {
-                flex: 0 0 250px;
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
             }
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 5%;
+            }
+            
+            main {
+                margin-top: 60px;
+            }
+            
+            section {
+                padding: 2rem 5%;
+            }
+            
             nav ul {
                 display: none;
                 position: absolute;
@@ -626,10 +665,16 @@
                 flex-direction: column;
                 padding: 1rem 0;
                 text-align: center;
+                gap: 0;
             }
             
             nav ul.active {
                 display: flex;
+            }
+            
+            nav a {
+                display: block;
+                padding: 0.8rem;
             }
             
             .mobile-menu-btn {
@@ -637,38 +682,69 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .headshot-container {
+                flex: 0 0 180px;
+            }
+            
+            .headshot {
+                max-width: 180px;
+            }
+            
+            .playlist-tracks {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .playlist-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .music-player {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .player-progress {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .headshot-container {
+                flex: 0 0 150px;
+            }
+            
+            .headshot {
+                max-width: 150px;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
-        }
-
-        /* Terminal Theme */
-        .terminal-line {
-            font-family: 'Courier New', monospace;
-            color: var(--terminal);
-            margin-bottom: 0.5rem;
-        }
-
-        .terminal-prompt {
-            color: var(--secondary);
-        }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 20px;
-            background-color: var(--terminal);
-            animation: blink 1s infinite;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            
+            .person-quote {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -694,19 +770,16 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
+        <!-- Hero Section - Photo on LEFT -->
         <section id="home" class="hero">
+            <div class="headshot-container">
+                <img src="unnamed.jpg" alt="Levi" class="headshot">
+            </div>
             <div class="hero-content">
                 <h1>Hi, I'm <span>Levi</span></h1>
                 <div class="tagline">Front End Developer</div>
                 <p>Creating beautiful, functional web experiences with clean code and modern technologies. Passionate about user experience and performance optimization.</p>
-                <div class="terminal-line">
-                    <span class="terminal-prompt">levi@portfolio:~$</span> npm start creativity<span class="terminal-cursor"></span>
-                </div>
                 <a href="#projects" class="cta-button">View My Work</a>
-            </div>
-            <div class="headshot-container">
-                <img src="unnamed.jpg" alt="Levi" class="headshot">
             </div>
         </section>
 
@@ -721,7 +794,7 @@
                     <p>My approach to development combines technical expertise with creative problem-solving. I enjoy turning complex challenges into simple, elegant solutions.</p>
                 </div>
                 <div>
-                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Tech Stack</h3>
+                    <h3 style="margin-bottom: 1.2rem; color: var(--secondary);">Tech Stack</h3>
                     <div class="skills">
                         <span class="skill-tag">HTML5</span>
                         <span class="skill-tag">CSS3</span>
@@ -730,7 +803,6 @@
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">Responsive Design</span>
                         <span class="skill-tag">Web Performance</span>
-                        
                     </div>
                 </div>
             </div>
@@ -747,11 +819,7 @@
                     <div class="project-info">
                         <h3 class="project-title">Business</h3>
                         <p class="project-desc">A business website for a pastry shop.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            
-                        </div>
-                        <a href=" https://smoothjazz18n94.github.io/Little-Bites-Eatery/" class="project-link">View Project →</a>
+                        <a href="https://smoothjazz18n94.github.io/Little-Bites-Eatery/" class="project-link">View Project →</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -761,11 +829,6 @@
                     <div class="project-info">
                         <h3 class="project-title">Gallery</h3>
                         <p class="project-desc">A Photo Gallery.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Stripe API</span>
-                        </div>
                         <a href="#" class="project-link">View Project →</a>
                     </div>
                 </div>
@@ -774,13 +837,8 @@
                         <i class="fas fa-music"></i>
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title"> E-Commerce Platform</h3>
+                        <h3 class="project-title">E-Commerce Platform</h3>
                         <p class="project-desc">Web application for discovering new music based on your listening preferences.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Spotify API</span>
-                            <span class="tech-tag">Node.js</span>
-                        </div>
                         <a href="https://smoothjazz18n94.github.io/organic/" class="project-link">View Project →</a>
                     </div>
                 </div>
@@ -790,9 +848,9 @@
         <!-- Playlist Section -->
         <section id="playlist">
             <h2 class="section-title">This Week's Soundtrack</h2>
-             <div class="person-quote">
-                        "There's a real person behind this code."
-                    </div>
+            <div class="person-quote">
+                "There's a real person behind this code."
+            </div>
             <div class="playlist-container">
                 <div class="playlist-header">
                     <h3 class="playlist-title">Levi's Coding Playlist</h3>
@@ -866,25 +924,35 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                <form
+  class="contact-form"
+  action="https://formspree.io/f/xreebewq"
+  method="POST"
+>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" required>
+  </div>
+
+  <!-- Hidden settings -->
+  <input type="hidden" name="_subject" value="New message from levi1894.city">
+  <input type="hidden" name="_template" value="table">
+
+  <button type="submit" class="submit-btn">
+    Send Message
+  </button>
+</form>
+
             </div>
         </section>
     </main>
@@ -892,9 +960,9 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/smoothjazz18n94" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/levi-s-070030272?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/coolmensch_" class="social-link"><i class="fab fa-twitter"></i></a>
             <a href="#" class="social-link"><i class="fab fa-codepen"></i></a>
         </div>
         <p class="copyright">© <span id="currentYear"></span> Levi. All rights reserved.</p>
@@ -943,31 +1011,14 @@
                     
                     // Scroll to section
                     window.scrollTo({
-                        top: targetSection.offsetTop - 80,
+                        top: targetSection.offsetTop - 70,
                         behavior: 'smooth'
                     });
                 });
             });
             
             // Contact form submission
-            const contactForm = document.getElementById('contactForm');
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form values
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-                
-                // In a real application, you would send this data to a server
-                // For now, we'll just show an alert
-                alert(`Thank you for your message, ${name}! I'll get back to you at ${email} as soon as possible.`);
-                
-                // Reset form
-                contactForm.reset();
-            });
-            
+           
             // Dynamic color palette based on time of day
             updateColorPalette();
             
@@ -1039,11 +1090,11 @@
                 { title: "Neon Dreams", artist: "The Midnight", duration: "4:32" },
                 { title: "Synthetic Dawn", artist: "FM-84", duration: "5:12" },
                 { title: "Pixel Rain", artist: "Timecop1983", duration: "4:28" },
-                 { title: 'So What', artist: 'Miles Davis', duration: "3:50" },
-                { title: 'Blue in Green', artist: 'Bill Evans', duration: "4;01" },
-               { title: 'Midnight Blue', artist: 'Kenny Burrell', duration: "3:40" },
-               { title: 'Footprints', artist: 'Wayne Shorter', duration: "4:00" },
-               { title: 'Naima', artist: 'John Coltrane', duration: "4:30" }  
+                { title: 'So What', artist: 'Miles Davis', duration: "3:50" },
+                { title: 'Blue in Green', artist: 'Bill Evans', duration: "4:01" },
+                { title: 'Midnight Blue', artist: 'Kenny Burrell', duration: "3:40" },
+                { title: 'Footprints', artist: 'Wayne Shorter', duration: "4:00" },
+                { title: 'Naima', artist: 'John Coltrane', duration: "4:30" }  
             ];
             
             // Clear existing content
@@ -1104,122 +1155,23 @@
                         return;
                     }
                     
-                    progress += 0.5;
-                    progressBar.style.width = `${progress}%`;
-                }, 100);
-                
-                // Highlight current track
-                document.querySelectorAll('.track').forEach((trackEl, i) => {
-                    if (i === index) {
-                        trackEl.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
-                        trackEl.style.borderLeft = '3px solid var(--terminal)';
-                    } else {
-                        trackEl.style.backgroundColor = '';
-                        trackEl.style.borderLeft = 'none';
-                    }
-                });
+                        progress += 1;
+                    progressBar.style.width = progress + '%';
+                }, 200);
             }
-            
+
             function playNextTrack() {
-                currentTrack = (currentTrack + 1) % tracks.length;
-                playTrack(currentTrack);
+                playTrack((currentTrack + 1) % tracks.length);
             }
-            
+
             function playPrevTrack() {
-                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-                playTrack(currentTrack);
+                playTrack((currentTrack - 1 + tracks.length) % tracks.length);
             }
-            
-            function togglePlayPause() {
-                if (isPlaying) {
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    clearInterval(progressInterval);
-                } else {
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    // Resume progress
-                    let currentWidth = parseFloat(progressBar.style.width) || 0;
-                    let progress = currentWidth;
-                    
-                    progressInterval = setInterval(() => {
-                        if (progress >= 100) {
-                            clearInterval(progressInterval);
-                            playNextTrack();
-                            return;
-                        }
-                        
-                        progress += 0.5;
-                        progressBar.style.width = `${progress}%`;
-                    }, 100);
-                }
-                
-                isPlaying = !isPlaying;
-            }
-            
-            // Add event listeners to player controls
-            playBtn.addEventListener('click', togglePlayPause);
-            prevBtn.addEventListener('click', playPrevTrack);
+
             nextBtn.addEventListener('click', playNextTrack);
-            
-            // Auto-play first track
-            playTrack(0);
+            prevBtn.addEventListener('click', playPrevTrack);
         }
-        
-        // Update color palette based on time of day
-        function updateColorPalette() {
-            const hour = new Date().getHours();
-            const root = document.documentElement;
-            
-            if (hour >= 6 && hour < 12) {
-                // Morning
-                root.style.setProperty('--secondary', '#3498db');
-                root.style.setProperty('--terminal', '#00ff00');
-            } else if (hour >= 12 && hour < 18) {
-                // Afternoon
-                root.style.setProperty('--secondary', '#9b59b6');
-                root.style.setProperty('--terminal', '#ff9900');
-            } else if (hour >= 18 && hour < 22) {
-                // Evening
-                root.style.setProperty('--secondary', '#e74c3c');
-                root.style.setProperty('--terminal', '#ff5555');
-            } else {
-                // Night
-                root.style.setProperty('--secondary', '#2c3e50');
-                root.style.setProperty('--terminal', '#00ccff');
-            }
-        }
-        
-        // Setup scroll animations
-        function setupScrollAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe sections for animation
-            document.querySelectorAll('section').forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(section);
-            });
-            
-            // Observe project cards
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(card);
-            });
-        }
-    </script>
+    
+</script>
 </body>
 </html>
