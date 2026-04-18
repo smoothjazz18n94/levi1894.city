@@ -1,1212 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Levi | Front End Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-       :root {
-  --primary: #2b2622;    /* deep warm charcoal (fireplace / shadows) */
-  --secondary: #8b5e3c;  /* earthy wood / rust tone */
-  --accent: #a67c52;     /* warm textile / brass highlight */
-  --light: #f3f1ee;      /* soft warm off-white (walls / daylight) */
-  --dark: #3a332e;       /* dark brown-gray (depth, contrast) */
-  --terminal: #6b8f71;   /* muted olive green (plant / nature accent) */
-  --transition: all 0.3s ease;
-}
-
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--light);
-            background-color: var(--dark);
-            overflow-x: hidden;
-        }
-
-        /* Code Background Animation */
-        #code-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        .code-line {
-            position: absolute;
-            color: var(--terminal);
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            animation: floatCode 20s linear infinite;
-        }
-
-        @keyframes floatCode {
-            0% {
-                transform: translateY(100vh) translateX(-100px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 5%;
-            background-color: rgba(26, 37, 47, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--secondary);
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: var(--terminal);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        nav a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        nav a:hover {
-            color: var(--terminal);
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-
-        nav a::after {
-            content: '>';
-            position: absolute;
-            left: -15px;
-            opacity: 0;
-            transition: var(--transition);
-            color: var(--terminal);
-        }
-
-        nav a:hover::after {
-            opacity: 1;
-            left: -10px;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--light);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 70px;
-        }
-
-        section {
-            padding: 3rem 5%;
-            min-height: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--secondary);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
-        }
-
-        /* Hero Section - Photo on LEFT */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 3rem;
-            flex-direction: row;
-        }
-
-        .headshot-container {
-            flex: 0 0 250px;
-            position: relative;
-        }
-
-        .headshot {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 50%;
-            border: 5px solid var(--secondary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        .headshot:hover {
-            transform: scale(1.05);
-            border-color: var(--terminal);
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.2;
-        }
-
-        .hero h1 span {
-            color: var(--terminal);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #bdc3c7;
-            max-width: 600px;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid var(--secondary);
-        }
-
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--secondary);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
-        }
-
-        .person-quote {
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--terminal);
-            padding: 1.2rem;
-            border-left: 4px solid var(--accent);
-            background-color: rgba(52, 152, 219, 0.05);
-            margin: 1.5rem 0;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .skill-tag {
-            padding: 0.5rem 1rem;
-            background-color: rgba(52, 152, 219, 0.1);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            transition: var(--transition);
-        }
-
-        .skill-tag:hover {
-            background-color: rgba(52, 152, 219, 0.2);
-            transform: translateY(-3px);
-        }
-
-        /* Playlist Section */
-        .playlist-container {
-            background-color: rgba(26, 37, 47, 0.7);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(52, 152, 219, 0.2);
-        }
-
-        .playlist-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .playlist-title {
-            font-size: 1.5rem;
-            color: var(--terminal);
-        }
-
-        .playlist-update {
-            color: #bdc3c7;
-            font-size: 0.9rem;
-        }
-
-        .playlist-description {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            color: #bdc3c7;
-        }
-
-        .playlist-tracks {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .track {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem;
-            background-color: rgba(44, 62, 80, 0.5);
-            border-radius: 8px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .track:hover {
-            background-color: rgba(44, 62, 80, 0.8);
-            transform: translateY(-3px);
-        }
-
-        .track-number {
-            font-size: 1.1rem;
-            color: var(--terminal);
-            margin-right: 0.8rem;
-            font-weight: bold;
-        }
-
-        .track-info {
-            flex: 1;
-        }
-
-        .track-title {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .track-artist {
-            color: #bdc3c7;
-            font-size: 0.85rem;
-        }
-
-        .track-duration {
-            color: #7f8c8d;
-            font-size: 0.85rem;
-        }
-
-        .music-player {
-            margin-top: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .player-controls {
-            display: flex;
-            gap: 0.8rem;
-        }
-
-        .player-btn {
-            background: none;
-            border: none;
-            color: var(--light);
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .player-btn:hover {
-            color: var(--terminal);
-        }
-
-        .player-progress {
-            flex: 1;
-            min-width: 150px;
-            height: 4px;
-            background-color: rgba(52, 152, 219, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 30%;
-            background-color: var(--secondary);
-            transition: width 0.3s ease;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .project-card {
-            background-color: rgba(26, 37, 47, 0.7);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--terminal);
-        }
-
-        .project-img {
-            height: 180px;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--terminal);
-            font-size: 2.5rem;
-        }
-
-        .project-info {
-            padding: 1.2rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--secondary);
-        }
-
-        .project-desc {
-            color: #bdc3c7;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .tech-tag {
-            padding: 0.3rem 0.7rem;
-            background-color: rgba(231, 76, 60, 0.1);
-            border-radius: 15px;
-            font-size: 0.75rem;
-            color: var(--accent);
-        }
-
-        .project-link {
-            display: inline-block;
-            color: var(--terminal);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .contact-icon {
-            font-size: 1.3rem;
-            color: var(--secondary);
-            width: 45px;
-            height: 45px;
-            background-color: rgba(52, 152, 219, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .contact-details h3 {
-            margin-bottom: 0.2rem;
-            color: var(--light);
-            font-size: 1rem;
-        }
-
-        .contact-details p {
-            color: #bdc3c7;
-            font-size: 0.9rem;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-group label {
-            color: var(--light);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 0.7rem;
-            background-color: rgba(26, 37, 47, 0.7);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            border-radius: 4px;
-            color: var(--light);
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--terminal);
-        }
-
-        .submit-btn {
-            padding: 0.7rem 1.8rem;
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            align-self: flex-start;
-            font-size: 0.9rem;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--terminal);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            background-color: rgba(26, 37, 47, 0.9);
-            border-top: 1px solid rgba(52, 152, 219, 0.2);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .social-link {
-            color: var(--light);
-            font-size: 1.3rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            color: var(--terminal);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            color: #7f8c8d;
-            font-size: 0.85rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-            }
-            
-            .headshot-container {
-                flex: 0 0 200px;
-            }
-            
-            .headshot {
-                max-width: 200px;
-            }
-            
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 0.8rem 5%;
-            }
-            
-            main {
-                margin-top: 60px;
-            }
-            
-            section {
-                padding: 2rem 5%;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--dark);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                gap: 0;
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav a {
-                display: block;
-                padding: 0.8rem;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1.2rem;
-            }
-            
-            .hero p {
-                 font-size: 1.1rem;
-  line-height: 1.75;
-            }
-            
-            .headshot-container {
-                flex: 0 0 180px;
-            }
-            
-            .headshot {
-                max-width: 180px;
-            }
-            
-            .playlist-tracks {
-                grid-template-columns: 1fr;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .playlist-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .music-player {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .player-progress {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .headshot-container {
-                flex: 0 0 150px;
-            }
-            
-            .headshot {
-                max-width: 150px;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .person-quote {
-                font-size: 1.1rem;
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Levi — Full Stack Web Developer</title>
+  <meta name="description" content="Full Stack Web Developer specializing in building exceptional digital experiences. Based in Accra, available worldwide." />
+  <meta name="keywords" content="web developer, full stack, React, Node.js, JavaScript, portfolio" />
+  <meta property="og:title" content="Levi — Full Stack Developer" />
+  <meta property="og:description" content="Building exceptional digital experiences with modern technologies." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Animated Code Background -->
-    <div id="code-bg"></div>
 
-    <!-- Header -->
-    <header>
-        <a href="#" class="logo">Levi — Web Developer<span></span></a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <nav>
-            <ul id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#playlist">Playlist</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
 
-    <main>
-        <!-- Hero Section - Photo on LEFT -->
-        <section id="home" class="hero">
-            <div class="headshot-container">
-                <img src="unnamed.jpg" alt="Levi" class="headshot">
-            </div>
-            <div class="hero-content">
-                <h1>Hi, I'm <span>Levi</span></h1>
-            
-                <p>I build intentional interfaces with a focus on clarity and clean code.</p>
-                <a href="#projects" class="cta-button">View My Work</a>
-            </div>
-        </section>
+  <!-- NOISE OVERLAY -->
+  <div class="noise"></div>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I enjoy building interfaces that feel calm, usable, and intentional. I prioritize clarity over noise and value long-lasting design over passing trends. I am committed to writing clean, maintainable code and staying current with the evolving web landscape. When I’m not coding, you can find me reading tech blogs, watching football and movies, or exploring new ideas through personal projects</p>
-                   
-                </div>
-                <div>
-                    <h3 style="margin-bottom: 1.2rem; color: var(--secondary);">Tech Stack</h3>
-                    <div class="skills">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Responsive Design</span>
-                        <span class="skill-tag">Web Performance</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="now">
-  <h2 class="section-title">Currently</h2>
-  <div class="playlist-container">
-    <ul style="list-style: none; line-height: 1.8;">
-      <li>• Learning deeper JavaScript and Java fundamentals</li>
-      <li>• Building small business websites</li>
-      <li>• Exploring music while coding late nights</li>
+  <!-- ══════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-bracket">[</span>LS<span class="logo-bracket">]</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about"   class="nav-link" data-text="About">About</a></li>
+      <li><a href="#projects" class="nav-link" data-text="Work">Work</a></li>
+      <li><a href="#skills"  class="nav-link" data-text="Skills">Skills</a></li>
+      <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
     </ul>
-  </div>
-</section>
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Business</h3>
-                        <p class="project-desc">A real small-business website focused on layout clarity,
-mobile responsiveness, and clean structure.</p>
-                        <a href="https://smoothjazz18n94.github.io/littlebyte/" class="project-link">View Project →</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">E-Commerce Platform</h3>
-                        <p class="project-desc">A simple front-end project focused on structure,
-interaction, and layout consistency.</p>
-                        <a href="https://smoothjazz18n94.github.io/organic/" class="project-link">View Project →</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img">
-                       <i class="fa-solid fa-umbrella-beach"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Tourism</h3>
-                        <p class="project-desc">Adventure Group website.</p>
-                        <a href="https://smoothjazz18n94.github.io/OTF/" class="project-link">View Project →</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">My Quiet Corner</h3>
-                        <p class="project-desc">An orderly collection of my thoughts and interests..</p>
-                        <a href="https://smoothjazz18n94.github.io/myquietcorner/" class="project-link">View Project →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
 
-        <!-- Playlist Section -->
-        <section id="playlist">
-            <div class="person-quote">
-                "I like building things that feel intentional.
-  I’m more interested in clarity than trends,
-  and I enjoy solving problems quietly and well."
-            </div>
-            <h2 class="section-title">This Week's Soundtrack</h2>
-            
-            <div class="playlist-container">
-                <div class="playlist-header">
-                    <h3 class="playlist-title">Levi's Coding Playlist</h3>
-                    <div class="playlist-update">Updated: <span id="currentDate"></span></div>
-                </div>
-                <p class="playlist-description">Focus music for problem-solving and long coding sessions this week.</p>
-                
-                <div class="playlist-tracks" id="playlistTracks">
-                    <!-- Tracks will be populated by JavaScript -->
-                </div>
-                
-                <div class="music-player">
-                    <div class="player-controls">
-                        <button class="player-btn" id="prevBtn">
-                            <i class="fas fa-step-backward"></i>
-                        </button>
-                        <button class="player-btn" id="playBtn">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <button class="player-btn" id="nextBtn">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
-                    </div>
-                    <div class="player-progress">
-                        <div class="progress-bar" id="progressBar"></div>
-                    </div>
-                    <div id="nowPlaying">Select a track to play</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-         <section id="collaboration">
-  <h2>Working Together</h2>
-  <p>
-    I’m open to collaborations, small projects, and shared learning opportunities.
-    If you value clarity, structure, and thoughtful execution, I’m happy to talk.
-  </p>
-</section>
-        <section id="contact">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>levi@africamail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Website</h3>
-                            <p>levi1894.city</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Location</h3>
-                            <p>Remote / Available Worldwide</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Response Time</h3>
-                            <p>Usually within 24 hours</p>
-                        </div>
-                    </div>
-                </div>
-                <form
-  class="contact-form"
-  action="https://formspree.io/f/xreebewq"
-  method="POST"
->
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" required>
+  <!-- MOBILE MENU -->
+  <div class="mob-nav" id="mobNav">
+    <a href="#about"    class="mob-link" onclick="closeMob()"><span>01</span>About</a>
+    <a href="#projects" class="mob-link" onclick="closeMob()"><span>02</span>Work</a>
+    <a href="#skills"   class="mob-link" onclick="closeMob()"><span>03</span>Skills</a>
+    <a href="#contact"  class="mob-link" onclick="closeMob()"><span>04</span>Contact</a>
   </div>
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-  </div>
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <!-- Grid background -->
+    <div class="hero-grid"></div>
 
-  <div class="form-group">
-    <label for="subject">Subject</label>
-    <input type="text" name="subject" id="subject" required>
-  </div>
+    <!-- Orb glow -->
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
 
-  <!-- Hidden settings -->
-  <input type="hidden" name="_subject" value="New message from levi1894.city">
-  <input type="hidden" name="_template" value="table">
+    <!-- Status badge -->
+    <div class="hero-badge reveal" data-delay="0">
+      <span class="badge-dot"></span>
+      Available for new projects
+    </div>
 
-  <button type="submit" class="submit-btn">
-    Send Message
-  </button>
-</form>
+    <!-- Main headline -->
+    <div class="hero-headline">
+      <p class="hero-greeting reveal" data-delay="100">Hello, I'm</p>
+      <h1 class="hero-name">
+        <span class="name-word reveal" data-delay="150">Levi</span>
+        <span class="name-word reveal accent-text" data-delay="200">S</span>
+      </h1>
+      <div class="hero-title reveal" data-delay="280">
+        <span class="title-line"></span>
+        <p>Full Stack Web Developer</p>
+        <span class="title-line"></span>
+      </div>
+    </div>
 
+    <!-- Tagline -->
+    <p class="hero-tagline reveal" data-delay="360">
+      I craft <em>performant</em>, <em>accessible</em> digital products<br>
+      that live at the intersection of design and engineering.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-actions reveal" data-delay="440">
+      <a href="#projects" class="btn-primary">
+        <span>View My Work</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Contact Me</a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator reveal" data-delay="560">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <!-- Hero stats -->
+    <div class="hero-stats reveal" data-delay="380">
+      <div class="stat">
+        <span class="stat-num" data-count="3">0</span><span class="stat-suf">+</span>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-count="24">0</span><span class="stat-suf">+</span>
+        <p>Projects Built</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-count="12">0</span><span class="stat-suf">+</span>
+        <p>Happy Clients</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════ -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-label reveal">
+        <span class="label-num">01</span>
+        <span class="label-line"></span>
+        <span>About Me</span>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: Image column -->
+        <div class="about-visual reveal-left">
+          <div class="about-img-wrap">
+            <div class="about-img-frame">
+              <!-- Avatar placeholder — replace src with your photo -->
+              <img src="/unnamed.jpg" alt="Levi" class="avatar-img">
+                <div class="avatar-ring r1"></div>
+                <div class="avatar-ring r2"></div>
+              </div>
             </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/smoothjazz18n94" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/levi-s-070030272?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-link"><i class="fab fa-linkedin"></i></a>
-            <a href="https://x.com/coolmensch_" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-codepen"></i></a>
+            <div class="about-img-decoration"></div>
+          </div>
+          <!-- Social links -->
+          <div class="about-socials">
+            <a href="https://github.com/smoothjazz18n94" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="linkedin" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="mailto:levi@africamail.com" class="social-link" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
         </div>
-        <p class="copyright">© <span id="currentYear"></span> Levi.  All rights reserved.</p>
-        
-    </footer>
 
-    <script>
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current date and year
-            const currentDate = new Date();
-            document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            document.getElementById('currentYear').textContent = currentDate.getFullYear();
-            
-            // Create animated code background
-            createCodeBackground();
-            
-            // Initialize playlist
-            initializePlaylist();
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navMenu = document.getElementById('navMenu');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    // Close mobile menu if open
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    
-                    // Scroll to section
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Contact form submission
-           
-            // Dynamic color palette based on time of day
-            updateColorPalette();
-            
-            // Add scroll animations
-            setupScrollAnimations();
-        });
-        
-        // Create animated code background
-        function createCodeBackground() {
-            const codeBg = document.getElementById('code-bg');
-            const codeLines = [
-                "function createPortfolio() {",
-                "  const skills = ['HTML', 'CSS', 'JS'];",
-                "  return <Portfolio skills={skills} />;",
-                "}",
-                "const developer = new Developer('Levi');",
-                "developer.specialize('Frontend');",
-                "if (problem) {",
-                "  solve(problem);",
-                "}",
-                "npm install creativity --save-dev",
-                "git commit -m 'Add awesome portfolio'",
-                "while (coding) {",
-                "  drinkCoffee();",
-                "}",
-                "const portfolio = {",
-                "  modern: true,",
-                "  minimal: true,",
-                "  interactive: true",
-                "};"
-            ];
-            
-            // Create code lines at random positions
-            for (let i = 0; i < 15; i++) {
-                const codeLine = document.createElement('div');
-                codeLine.className = 'code-line';
-                codeLine.textContent = codeLines[Math.floor(Math.random() * codeLines.length)];
-                codeLine.style.left = `${Math.random() * 100}%`;
-                codeLine.style.animationDelay = `${Math.random() * 20}s`;
-                codeLine.style.fontSize = `${12 + Math.random() * 6}px`;
-                codeBg.appendChild(codeLine);
-            }
-            
-            // Make code lines interactive on hover
-            document.querySelectorAll('.code-line').forEach(line => {
-                line.addEventListener('mouseenter', function() {
-                    this.style.opacity = '1';
-                    this.style.color = '#ff5555';
-                    this.style.textShadow = '0 0 10px #ff5555';
-                });
-                
-                line.addEventListener('mouseleave', function() {
-                    this.style.opacity = '0.7';
-                    this.style.color = '';
-                    this.style.textShadow = '';
-                });
-            });
-        }
-        
-        // Initialize playlist with tracks
-        function initializePlaylist() {
-            const playlistTracks = document.getElementById('playlistTracks');
-            const tracks = [
-                { title: "Midnight City", artist: "M83", duration: "4:04" },
-                { title: "Blinding Lights", artist: "The Weeknd", duration: "3:22" },
-                { title: "Solar Echoes", artist: "Waveshaper", duration: "4:18" },
-                { title: "Digital Love", artist: "Daft Punk", duration: "5:01" },
-                { title: "Code Cascade", artist: "Home", duration: "3:45" },
-                { title: "Neon Dreams", artist: "The Midnight", duration: "4:32" },
-                { title: "Synthetic Dawn", artist: "FM-84", duration: "5:12" },
-                { title: "Pixel Rain", artist: "Timecop1983", duration: "4:28" },
-                { title: 'So What', artist: 'Miles Davis', duration: "3:50" },
-                { title: 'Blue in Green', artist: 'Bill Evans', duration: "4:01" },
-                { title: 'Midnight Blue', artist: 'Kenny Burrell', duration: "3:40" },
-                { title: 'Footprints', artist: 'Wayne Shorter', duration: "4:00" },
-                { title: 'Naima', artist: 'John Coltrane', duration: "4:30" }  
-            ];
-            
-            // Clear existing content
-            playlistTracks.innerHTML = '';
-            
-            // Add tracks to playlist
-            tracks.forEach((track, index) => {
-                const trackElement = document.createElement('div');
-                trackElement.className = 'track';
-                trackElement.dataset.index = index;
-                
-                trackElement.innerHTML = `
-                    <div class="track-number">${index + 1}</div>
-                    <div class="track-info">
-                        <div class="track-title">${track.title}</div>
-                        <div class="track-artist">${track.artist}</div>
-                    </div>
-                    <div class="track-duration">${track.duration}</div>
-                `;
-                
-                // Add click event to play track
-                trackElement.addEventListener('click', function() {
-                    playTrack(index);
-                });
-                
-                playlistTracks.appendChild(trackElement);
-            });
-            
-            // Initialize player controls
-            const playBtn = document.getElementById('playBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const progressBar = document.getElementById('progressBar');
-            const nowPlaying = document.getElementById('nowPlaying');
-            
-            let currentTrack = 0;
-            let isPlaying = false;
-            let progressInterval;
-            
-            function playTrack(index) {
-                currentTrack = index;
-                const track = tracks[index];
-                nowPlaying.textContent = `Now Playing: ${track.title} - ${track.artist}`;
-                
-                // Update play button
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                isPlaying = true;
-                
-                // Reset and start progress bar
-                clearInterval(progressInterval);
-                let progress = 0;
-                progressBar.style.width = '0%';
-                
-                progressInterval = setInterval(() => {
-                    if (progress >= 100) {
-                        clearInterval(progressInterval);
-                        playNextTrack();
-                        return;
-                    }
-                    
-                        progress += 1;
-                    progressBar.style.width = progress + '%';
-                }, 200);
-            }
+        <!-- Right: Bio + skills -->
+        <div class="about-content reveal-right">
+          <h2 class="about-heading">
+            Turning <em>ideas</em> into<br>digital <em>realities</em>
+          </h2>
 
-            function playNextTrack() {
-                playTrack((currentTrack + 1) % tracks.length);
-            }
+          <div class="about-bio">
+            <p>I'm a Full Stack Web Developer with over 3 years of experience building web applications that are fast, accessible, and genuinely useful. I specialize in JavaScript ecosystems — from React-powered frontends to Node.js backends — and I care deeply about the craft of writing clean, maintainable code.</p>
+            <p>When I'm not building products, I'm contributing to open source, exploring new web APIs, or writing about development on my blog. I believe great software is a collaboration between developers, designers, and the humans who use it.</p>
+          </div>
 
-            function playPrevTrack() {
-                playTrack((currentTrack - 1 + tracks.length) % tracks.length);
-            }
+          <!-- Tech categories -->
+          <div class="tech-categories">
+            <div class="tech-cat">
+              <h4><span class="cat-icon">◈</span> Frontend</h4>
+              <div class="tech-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Tailwind</span>
+              </div>
+            </div>
+            <div class="tech-cat">
+              <h4><span class="cat-icon">◉</span> Backend</h4>
+              <div class="tech-tags">
+                <span class="tag">Node.js</span>
+                <span class="tag">Express</span>
+                <span class="tag">MongoDB</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">REST APIs</span>
+              </div>
+            </div>
+            <div class="tech-cat">
+              <h4><span class="cat-icon">◻</span> Tools</h4>
+              <div class="tech-tags">
+                <span class="tag">Git</span>
+                <span class="tag">GitHub</span>
+                <span class="tag">Figma</span>
+                <span class="tag">Vercel</span>
+                <span class="tag">Render</span>
+                <span class="tag">VS Code</span>
+              </div>
+            </div>
+          </div>
 
-            nextBtn.addEventListener('click', playNextTrack);
-            prevBtn.addEventListener('click', playPrevTrack);
-        }
-    
-</script>
+          <a href="#" class="btn-outline download-cv" download>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PROJECTS
+  ══════════════════════════════════════ -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-label reveal">
+        <span class="label-num">02</span>
+        <span class="label-line"></span>
+        <span>Selected Work</span>
+      </div>
+
+      <div class="projects-header">
+        <h2 class="section-title reveal">
+          Things I've <em>built</em>
+        </h2>
+        <!-- Filter -->
+        <div class="project-filters reveal" data-delay="100">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+          <button class="filter-btn" data-filter="ui">UI / Design</button>
+        </div>
+      </div>
+
+      <!-- Projects grid — rendered by JS -->
+      <div class="projects-grid" id="projectsGrid"></div>
+
+      <div class="projects-more reveal">
+        <a href="https://github.com" target="_blank" rel="noopener" class="btn-ghost">
+          View all on GitHub →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SKILLS
+  ══════════════════════════════════════ -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <div class="section-label reveal">
+        <span class="label-num">03</span>
+        <span class="label-line"></span>
+        <span>Skills & Tools</span>
+      </div>
+
+      <h2 class="section-title reveal">What I work with</h2>
+
+      <div class="skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════ -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-label reveal">
+        <span class="label-num">04</span>
+        <span class="label-line"></span>
+        <span>Get In Touch</span>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left -->
+        <div class="contact-left reveal-left">
+          <h2 class="section-title">
+            Let's build something <em>remarkable</em>
+          </h2>
+          <p class="contact-desc">
+            Whether you have a project in mind, want to collaborate, or just want to say hello — my inbox is always open. I'll get back to you within 24 hours.
+          </p>
+
+          <div class="contact-methods">
+            <a href="mailto:alex@example.com" class="contact-method">
+              <div class="cm-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <span class="cm-label">Email</span>
+                <span class="cm-value">levi@africamail.com</span>
+              </div>
+              <svg class="cm-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-method">
+              <div class="cm-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <div>
+                <span class="cm-label">LinkedIn</span>
+                <span class="cm-value"><linkedin class="com">
+                <span class="cm-value">linkedin.com/in/levi</span>
+              </div>
+              <svg class="cm-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+
+            <a href="https://github.com" target="_blank" rel="noopener" class="contact-method">
+              <div class="cm-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </div>
+              <div>
+                <span class="cm-label">GitHub</span>
+                <span class="cm-value">github.com/smoothjazz1894</span>
+              </div>
+              <svg class="cm-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-wrap reveal-right">
+          <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" name="name" placeholder="Smooth Jazz" required autocomplete="name"/>
+              </div>
+              <div class="form-field">
+                <label for="cEmail">Email</label>
+                <input type="email" id="cEmail" name="email" placeholder="you@example.com" required autocomplete="email"/>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="cSubject">Subject</label>
+              <input type="text" id="cSubject" name="subject" placeholder="Project collaboration"/>
+            </div>
+            <div class="form-field">
+              <label for="cMsg">Message</label>
+              <textarea id="cMsg" name="message" placeholder="Tell me about your project…" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit" id="formBtn">
+              <span id="formBtnText">Send Message</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div id="formSuccess" class="form-success" hidden>
+              ✅ Message sent! I'll get back to you within 24 hours.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <a href="#hero" class="nav-logo footer-logo">
+          <span class="logo-bracket">[</span>LS<span class="logo-bracket">]</span>
+        </a>
+        <p>Full Stack Web Developer<br>Based in Accra · Available Worldwide</p>
+      </div>
+      <div class="footer-mid">
+        <a href="#about">About</a>
+        <a href="#projects">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com"   target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+        <a href="mailto:alex@example.com" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> levi. Designed & built with care.</p>
+      <p class="footer-tech">HTML · CSS · JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
