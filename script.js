@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   ALEX MENSAH — PORTFOLIO SCRIPT
+   PORTFOLIO SCRIPT
    Projects data, skills, all interactive behaviour
 ═══════════════════════════════════════════════════ */
 
