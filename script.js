@@ -55,13 +55,13 @@ const projects = [
 
   {
     title: "LittleByte Bakery",
-    description: "A bakery business website featuring menu displays, product highlights, and a clean responsive design for small businesses.",
+    description: "A food ordering website featuring menu displays, product highlights, and a clean responsive design for a small business.",
     tech: ["HTML", "CSS", "JavaScript"],
     category: "frontend",
     emoji: "🥐",
     color: "#ec4899",
-    live: " https://smoothjazz18n94.github.io/littlebyte/", // change if needed
-    github: "https://github.com/smoothjazz18n94/littlebyte",
+    live: " https://bridge-pub.vercel.app/, // change if needed
+   
   }
 ];
 
