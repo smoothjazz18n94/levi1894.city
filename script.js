@@ -54,7 +54,7 @@ const projects = [
   },
 
   {
-    title: "LittleByte Bakery",
+    title: "Bridge Pub",
     description: "A food ordering website featuring menu displays, product highlights, and a clean responsive design for a small business.",
     tech: ["HTML", "CSS", "JavaScript"],
     category: "frontend",
