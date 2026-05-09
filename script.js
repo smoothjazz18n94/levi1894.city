@@ -60,9 +60,9 @@ const projects = [
     category: "frontend",
     emoji: "🥐",
     color: "#ec4899",
-    live: " https://bridge-pub.vercel.app/, 
+    live: "https://bridge-pub.vercel.app/", 
    
-  },
+  }
 ];
 
 
