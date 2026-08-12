@@ -9,6 +9,16 @@
    Categories: "frontend", "fullstack", "ui"
 ════════════════════════════════════════ */
 const projects = [
+
+   {
+    title: "Global Horizons — Travel Booking Platform",
+    description: "A full-stack web application for a travel agency, enabling customers to browse destinations and tour packages, view a photo gallery, and submit bookings online. Built with Next.js and TypeScript, with PostgreSQL (via Supabase) for data persistence and NextAuth for authentication",
+    tech: Next.js, TypeScript, PostgreSQL, Supabase, NextAuth.js, Cloudinary, Resend, Vercel,
+    category: "frontend",
+    emoji: "🥐",
+    color: "#ec4899",
+    live: "global-horizons-ten.vercel.app" ,
+  },
   {
     title: "VaultGreen Bank",
     description: "A modern international banking website featuring account management, financial services pages, and a professional fintech UI design.",
@@ -51,17 +61,6 @@ const projects = [
     color: "#f59e0b",
     live: "https://gsecureshipment.onrender.com/", // change if needed
     github: "https://github.com/smoothjazz18n94/gsecureshipment",
-  },
-
-  {
-    title: "LittleByte Bakery",
-    description: "A bakery business website featuring menu displays, product highlights, and a clean responsive design for small businesses.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    category: "frontend",
-    emoji: "🥐",
-    color: "#ec4899",
-    live: " https://smoothjazz18n94.github.io/littlebyte/", // change if needed
-    github: "https://github.com/smoothjazz18n94/littlebyte",
   }
 ];
 
