@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   ALEX MENSAH — PORTFOLIO SCRIPT
+   LEVI SARFO — PORTFOLIO SCRIPT
    Projects data, skills, all interactive behaviour
 ═══════════════════════════════════════════════════ */
 
@@ -11,14 +11,15 @@
 const projects = [
 
    {
-    title: "Global Horizons — Travel Booking Platform",
-    description: "A full-stack web application for a travel agency, enabling customers to browse destinations and tour packages, view a photo gallery, and submit bookings online. Built with Next.js and TypeScript, with PostgreSQL (via Supabase) for data persistence and NextAuth for authentication",
-    tech: Next.js, TypeScript, PostgreSQL, Supabase, NextAuth.js, Cloudinary, Resend, Vercel,
-    category: "frontend",
-    emoji: "🥐",
-    color: "#ec4899",
-    live: "global-horizons-ten.vercel.app" ,
-  },
+  title: "Global Horizons — Travel Booking Platform",
+  description: "A full-stack web application for a travel agency, enabling customers to browse destinations and tour packages, view a photo gallery, and submit bookings online. Built with Next.js and TypeScript, with PostgreSQL (via Supabase) for data persistence and NextAuth for authentication",
+  tech: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "NextAuth.js", "Cloudinary", "Resend", "Vercel"],
+  category: "frontend",
+  emoji: "🥐",
+  color: "#ec4899",
+  live: "https://global-horizons-ten.vercel.app",
+  github: "https://github.com/smoothjazz18n94/GlobalHorizons",
+},
   {
     title: "VaultGreen Bank",
     description: "A modern international banking website featuring account management, financial services pages, and a professional fintech UI design.",
